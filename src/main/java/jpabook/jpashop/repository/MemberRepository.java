@@ -1,11 +1,11 @@
 package jpabook.jpashop.repository;
 
-import java.lang.reflect.Member;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import org.springframework.stereotype.Repository;
 
+import jpabook.jpashop.domain.Member;
 import lombok.RequiredArgsConstructor;
 
 @Repository
@@ -14,7 +14,7 @@ public class MemberRepository {
 
     private final EntityManager em;
 
-    public void save(jpabook.jpashop.domain.Member member) {
+    public void save(Member member) {
         em.persist(member);
     }
 
@@ -23,13 +23,14 @@ public class MemberRepository {
     }
 
     public List<Member> findAll() {
-        return em.createQuery("selete m from Memeber m", Member.class)
+        return em.createQuery("selete m from Member m", Member.class)
                  .getResultList();
     }
 
     public List<Member> findByName(String name) {
-        return em.createQuery("select m from Memeber m where m.name = :name", Member.class)
-                 .setParameter("name", name)
-                 .getResultList();
-    }
+        return em.createQuery("select m from Member m where m.name = :name",
+        Member.class)
+        .setParameter("name", name)
+        .getResultList();
+        }
 }
